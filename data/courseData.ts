@@ -127,6 +127,57 @@ export const courseData: CourseData = {
             }
         },
         {
+            id: '3a-pronombres-tonicos',
+            title: 'Les Pronoms Toniques',
+            type: 'lesson',
+            content: {
+                title: 'Les Pronoms Personnels Toniques',
+                introduction: 'Les pronoms toniques (tónicos) sont utilisés pour insister sur la personne ou après une préposition. Ils sont différents des pronoms sujets que l\'on utilise avec les verbes.',
+                sections: [
+                    {
+                        title: 'Quels sont les pronoms toniques ?',
+                        content: 'Voici la liste des pronoms toniques et leur équivalent en pronom sujet :',
+                        examples: [
+                            'Sujet: yo -> Tonique: mí (moi)',
+                            'Sujet: tú -> Tonique: ti (toi)',
+                            'Sujet: él -> Tonique: él (lui)',
+                            'Sujet: ella -> Tonique: ella (elle)',
+                            'Sujet: nosotros/as -> Tonique: nosotros/as (nous)',
+                            'Sujet: vosotros/as -> Tonique: vosotros/as (vous)',
+                            'Sujet: ellos/ellas -> Tonique: ellos/ellas (eux/elles)',
+                        ]
+                    },
+                    {
+                        title: 'Utilisation après une préposition',
+                        content: 'La principale utilisation des pronoms toniques est après les prépositions comme "a", "de", "en", "para", "por", "sin", "con".',
+                        examples: [
+                            'Este regalo es para mí. (Ce cadeau est pour moi.)',
+                            'Hablan de ti. (Ils parlent de toi.)',
+                            'Voy a la fiesta sin él. (Je vais à la fête sans lui.)'
+                        ]
+                    },
+                    {
+                        title: 'Cas spéciaux : conmigo, contigo',
+                        content: 'Avec la préposition "con", les pronoms "mí" et "ti" fusionnent pour former des mots uniques :',
+                        examples: [
+                            '¿Vienes conmigo al cine? (Tu viens avec moi au cinéma ?)',
+                            'No quiero ir contigo. (Je ne veux pas aller avec toi.)',
+                            'Attention: les autres formes ne changent pas (con él, con ella, con nosotros...)'
+                        ]
+                    },
+                    {
+                        title: 'Pour insister ou mettre l\'emphase',
+                        content: 'On peut utiliser le pronom tonique en début de phrase (précédé de "a") pour insister sur la personne concernée, notamment avec des verbes comme "gustar".',
+                        examples: [
+                            'A mí, me gusta el fútbol. (Moi, j\'aime le football.)',
+                            'A ti, te duele la cabeza. (Toi, tu as mal à la tête.)',
+                            'A ella, le encanta viajar. (Elle, elle adore voyager.)'
+                        ]
+                    }
+                ]
+            }
+        },
+        {
             id: '3a-articulos',
             title: 'Les Articles',
             type: 'lesson',
@@ -385,6 +436,63 @@ export const courseData: CourseData = {
                         options: ['Di', 'Diga', 'Dice', 'Decid'],
                         answer: 'Diga',
                         explanation: 'Pour l\'impératif formel ("usted"), on utilise la 3ème personne du singulier du subjonctif présent.'
+                    }
+                ]
+            }
+        },
+        {
+            id: 'bac-pronombres-interrogativos',
+            title: 'Les Pronoms Interrogatifs',
+            type: 'lesson',
+            content: {
+                title: 'Les Pronoms Interrogatifs (Qué, Quién, Cuál...)',
+                introduction: 'Les pronoms interrogatifs sont utilisés pour poser des questions sur des personnes, des choses, des lieux, etc. Ils portent toujours un accent écrit (tilde) pour les différencier des pronoms relatifs.',
+                sections: [
+                    {
+                        title: 'Quién / Quiénes (Qui)',
+                        content: 'Utilisé uniquement pour se référer à des personnes. "Quién" est singulier, "Quiénes" est pluriel.',
+                        examples: [
+                            '¿Quién es ese hombre? (Qui est cet homme ?)',
+                            '¿Con quién hablas? (Avec qui parles-tu ?)',
+                            '¿Quiénes son tus profesores? (Qui sont tes professeurs ?)'
+                        ]
+                    },
+                    {
+                        title: 'Qué (Que / Quoi / Quel)',
+                        content: 'Très polyvalent. On l\'utilise pour demander une définition ou pour s\'informer sur des choses en général. Devant un nom, il signifie "Quel(le)".',
+                        examples: [
+                            '¿Qué es esto? (Qu\'est-ce que c\'est ?)',
+                            '¿Qué quieres comer? (Que veux-tu manger ?)',
+                            '¿Qué libro lees? (Quel livre lis-tu ?)'
+                        ]
+                    },
+                    {
+                        title: 'Cuál / Cuáles (Lequel / Lesquels / Quel)',
+                        content: 'Implique une sélection ou un choix dans un groupe défini. "Cuál" est singulier, "Cuáles" est pluriel. On l\'utilise là où on utiliserait "lequel/laquelle" en français, ou "quel" devant le verbe être.',
+                        examples: [
+                            'Hay dos coches. ¿Cuál prefieres? (Il y a deux voitures. Laquelle préfères-tu ?)',
+                            '¿Cuál es tu color favorito? (Quelle est ta couleur préférée ? - choix parmi toutes les couleurs)',
+                            '¿Cuáles son tus asignaturas preferidas? (Quelles sont tes matières préférées ? - choix parmi toutes les matières)'
+                        ]
+                    },
+                    {
+                        title: 'Différence clé : ¿Qué? vs ¿Cuál?',
+                        content: 'C\'est une confusion fréquente. Devant le verbe "ser", on utilise "¿Qué?" pour demander une définition et "¿Cuál?" pour identifier un élément parmi d\'autres. Attention : devant un nom, on utilise toujours "Qué" pour dire "Quel".',
+                        examples: [
+                            '¿Qué es la geografía? (On demande une définition.)',
+                            '¿Cuál es la capital de España? (On demande d\'identifier une ville parmi un groupe de villes possibles.)',
+                            'Incorrect: *¿Cuál coche te gusta?* -> Correct: ¿Qué coche te gusta?'
+                        ]
+                    },
+                    {
+                        title: 'Autres Mots Interrogatifs',
+                        content: 'Voici d\'autres mots essentiels pour poser des questions.',
+                        examples: [
+                            'Dónde: ¿Dónde está el museo? (Où)',
+                            'Cuándo: ¿Cuándo es tu cumpleaños? (Quand)',
+                            'Cómo: ¿Cómo te llamas? (Comment)',
+                            'Cuánto/a/os/as: ¿Cuánto cuesta? (Combien)'
+                        ]
                     }
                 ]
             }

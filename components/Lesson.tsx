@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import type { LessonData } from '../types';
 // Fix: The 'PlayCircleIcon' component was not exported from './Icons'. Replaced it with 'SpeakerWaveIcon' for consistency with other audio components.
 import { BookOpenIcon, SpeakerWaveIcon } from './Icons';
@@ -9,6 +9,8 @@ interface LessonProps {
 }
 
 export const Lesson: React.FC<LessonProps> = ({ data }) => {
+    const [showTranscription, setShowTranscription] = useState(false);
+
     return (
         <div className="prose dark:prose-invert max-w-none prose-h1:font-display prose-h2:font-display">
             <header className="mb-8 border-b-2 border-primary dark:border-blue-400 pb-4">
@@ -25,15 +27,23 @@ export const Lesson: React.FC<LessonProps> = ({ data }) => {
                         <SpeakerWaveIcon className="h-6 w-6 mr-2 text-primary dark:text-blue-400" />
                         Écouter la leçon
                     </h3>
-                    <audio controls className="w-full mb-4">
+                    <audio controls className="w-full rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary dark:focus:ring-blue-400 focus:ring-offset-gray-50 dark:focus:ring-offset-gray-800/50">
                         <source src={data.audioSrc} type="audio/mpeg" />
                         Votre navigateur ne supporte pas l'élément audio.
                     </audio>
                     {data.audioTranscription && (
-                        <div>
-                            <p className="text-sm text-gray-600 dark:text-gray-400 p-3 bg-gray-100 dark:bg-gray-900/50 rounded-md">
-                                {data.audioTranscription}
-                            </p>
+                        <div className="mt-4">
+                            <button 
+                                onClick={() => setShowTranscription(!showTranscription)}
+                                className="text-sm font-semibold text-primary dark:text-blue-400 hover:underline mb-2"
+                            >
+                                {showTranscription ? 'Cacher la transcription' : 'Afficher la transcription'}
+                            </button>
+                            {showTranscription && (
+                                <div className="p-3 bg-gray-100 dark:bg-gray-900/50 rounded-md">
+                                    <pre className="whitespace-pre-wrap font-sans text-sm text-gray-600 dark:text-gray-400">{data.audioTranscription.trim()}</pre>
+                                </div>
+                            )}
                         </div>
                     )}
                 </section>

@@ -1,7 +1,8 @@
 import React from 'react';
 import { describe, it, expect } from '@jest/globals';
 // Fix: Import 'screen' from '@testing-library/dom' to resolve module export errors.
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { screen } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { ListeningExercise } from './ListeningExercise';

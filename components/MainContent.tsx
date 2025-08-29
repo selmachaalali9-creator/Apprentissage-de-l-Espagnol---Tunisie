@@ -63,14 +63,17 @@ export const MainContent: React.FC<MainContentProps> = ({
         isActive: boolean;
         onClick: () => void;
     }> = ({ label, icon, isActive, onClick }) => (
-        <button 
-            onClick={onClick} 
-            className={`flex flex-col items-center justify-center space-y-1 w-full h-full text-sm font-medium transition-colors ${
+        <button
+            onClick={onClick}
+            className={`group flex h-full w-full flex-col items-center justify-center space-y-1 text-sm transition-colors focus:outline-none ${
                 isActive ? 'text-primary dark:text-blue-400' : 'text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-blue-400'
             }`}
+            aria-current={isActive ? 'page' : undefined}
         >
-            {icon}
-            <span>{label}</span>
+            <div className={`transform transition-transform duration-200 ease-in-out ${isActive ? 'scale-110' : 'group-hover:scale-105'}`}>
+                {icon}
+            </div>
+            <span className={`${isActive ? 'font-semibold' : 'font-medium'}`}>{label}</span>
         </button>
     );
     

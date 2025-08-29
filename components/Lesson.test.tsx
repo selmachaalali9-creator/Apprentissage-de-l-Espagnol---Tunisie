@@ -1,7 +1,9 @@
 import React from 'react';
 import { describe, it, expect } from '@jest/globals';
 // Fix: Import 'screen' from '@testing-library/dom' to resolve module export errors.
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
+import { screen } from '@testing-library/dom';
+import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { Lesson } from './Lesson';
 import type { LessonData } from '../types';
@@ -45,19 +47,37 @@ describe('Lesson', () => {
         expect(screen.getByText(/le présent est utilisé pour parler d'actions habituelles./i)).toBeInTheDocument();
     });
 
-    it('affiche le lecteur audio et la transcription s\'ils sont fournis', () => {
+    it('affiche le lecteur audio s\'il est fourni', () => {
         render(<Lesson data={mockLessonData} />);
         const audioPlayer = screen.getByRole('region', { name: /écouter la leçon/i });
         expect(audioPlayer).toBeInTheDocument();
         const audioElement = audioPlayer.querySelector('audio');
         expect(audioElement).toBeInTheDocument();
         expect(audioElement?.querySelector('source')).toHaveAttribute('src', mockLessonData.audioSrc);
-        expect(screen.getByText('Ceci est la transcription audio.')).toBeInTheDocument();
     });
 
     it('n\'affiche pas le lecteur audio si audioSrc n\'est pas fourni', () => {
         render(<Lesson data={mockLessonDataWithoutAudio} />);
         expect(screen.queryByRole('region', { name: /écouter la leçon/i })).not.toBeInTheDocument();
+    });
+
+    it('affiche et masque la transcription au clic du bouton', async () => {
+        const user = userEvent.setup();
+        render(<Lesson data={mockLessonData} />);
+
+        const toggleButton = screen.getByRole('button', { name: /afficher la transcription/i });
+        
+        // La transcription est initialement masquée
+        expect(screen.queryByText(mockLessonData.audioTranscription as string)).not.toBeInTheDocument();
+
+        // Cliquer pour afficher
+        await user.click(toggleButton);
+        expect(await screen.findByText(mockLessonData.audioTranscription as string)).toBeInTheDocument();
+        expect(screen.getByRole('button', { name: /cacher la transcription/i })).toBeInTheDocument();
+
+        // Cliquer pour masquer
+        await user.click(toggleButton);
+        expect(screen.queryByText(mockLessonData.audioTranscription as string)).not.toBeInTheDocument();
     });
 
     it('affiche les sections avec titres, contenu et exemples', () => {

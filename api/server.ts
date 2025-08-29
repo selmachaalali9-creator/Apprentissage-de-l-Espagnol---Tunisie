@@ -1,33 +1,28 @@
+// This file acts as a Vercel Serverless Function.
+
 // FIX: Resolve Express type conflicts by separating the express value and type imports.
 import express from 'express';
 import type { Request, Response } from 'express';
 import cors from 'cors';
 import { GoogleGenAI, Type } from "@google/genai";
-import dotenv from 'dotenv';
 
-dotenv.config();
-
-// This is a basic Express server to act as a proxy for the Gemini API.
-// It keeps the API key secure on the server-side.
+// Vercel handles environment variables automatically.
+// The API_KEY should be set in the Vercel project settings.
 
 const app = express();
-const PORT = process.env.PORT || 3000;
 
 // Middleware
-app.use(cors()); // Enable Cross-Origin Resource Sharing
-app.use(express.json()); // Parse JSON bodies
+app.use(cors());
+app.use(express.json());
 
 // Initialize Gemini
 if (!process.env.API_KEY) {
-    // In a real production environment, you would want more robust error handling
-    // and logging, and the server might fail to start.
     console.error("FATAL ERROR: API_KEY environment variable not set.");
-    // For this environment, we'll throw to prevent the server from running without a key.
     throw new Error("API_KEY environment variable not set.");
 }
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
 
-// Re-define the schema on the server
+// Schema for the exercise data
 const exerciseSchema = {
     type: Type.OBJECT,
     properties: {
@@ -107,6 +102,5 @@ app.post('/api/generate', async (req: Request, res: Response) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-});
+// Vercel doesn't need app.listen(). It wraps the 'app' export in its own server.
+export default app;

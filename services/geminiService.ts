@@ -16,11 +16,13 @@ export const generateExercise = async (topic: string, level: string, difficulty:
         });
 
         if (!response.ok) {
-            let errorMsg = `Server responded with status: ${response.status}`;
+            let errorMsg = "Le serveur a rencontré une erreur. Veuillez réessayer plus tard.";
             try {
                 // Try to parse a more specific error message from the backend
                 const errorData = await response.json();
-                errorMsg = errorData.error || errorMsg;
+                if (errorData.error) {
+                    errorMsg = `Erreur de l'IA : ${errorData.error}`;
+                }
             } catch (e) {
                 // Ignore if response is not json
             }
@@ -31,14 +33,20 @@ export const generateExercise = async (topic: string, level: string, difficulty:
         
         // Basic validation on the received data
         if (!data.title || !Array.isArray(data.questions) || data.questions.length === 0) {
-            throw new Error("Invalid data structure received from the server.");
+            throw new Error("L'IA a renvoyé des données invalides. Veuillez réessayer.");
         }
         
         return data;
 
     } catch (error) {
         console.error("Error fetching exercise from backend:", error);
-        // Re-throw a more user-friendly error message
-        throw new Error("La génération de l'exercice a échoué. Veuillez vérifier votre connexion et réessayer.");
+
+        // If it's one of our custom user-friendly errors, re-throw it.
+        if (error instanceof Error && (error.message.startsWith("L'IA a renvoyé") || error.message.startsWith("Erreur de l'IA") || error.message.startsWith("Le serveur a rencontré"))) {
+             throw error;
+        }
+
+        // For other errors (like fetch failed due to network issue), throw a different message.
+        throw new Error("La connexion au serveur a échoué. Veuillez vérifier votre connexion et réessayer.");
     }
 };

@@ -98,7 +98,12 @@ const App: React.FC = () => {
             };
             setGeneratedExercise(newExercise);
         } catch (err) {
-            setError('Une erreur est survenue lors de la génération de l\'exercice. Veuillez réessayer.');
+            // The service now provides user-friendly error messages.
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError('Une erreur inattendue est survenue.');
+            }
             console.error(err);
         } finally {
             setIsLoading(false);

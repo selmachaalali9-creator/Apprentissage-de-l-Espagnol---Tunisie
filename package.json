@@ -1,0 +1,25 @@
+{
+  "name": "espagnol-facile-tunisie",
+  "version": "1.0.0",
+  "description": "Backend server for the 'Apprentissage de l'Espagnol - Tunisie' application.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "ts-node-esm server.ts",
+    "dev": "nodemon --watch 'server.ts' --exec 'ts-node-esm' server.ts"
+  },
+  "dependencies": {
+    "@google/genai": "^1.16.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.12",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
